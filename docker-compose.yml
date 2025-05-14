@@ -1,0 +1,17 @@
+# docker-compose.yml
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "8501:8501"
+    command: [
+      "conda", "run", "-n", "myenv",
+      "streamlit", "run", "main.py",
+      "--server.port", "8501",
+      "--server.address", "0.0.0.0"
+    ]
